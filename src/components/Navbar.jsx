@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { LuHome } from "react-icons/lu";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoMdCopy } from "react-icons/io";
@@ -9,22 +9,29 @@ import { HiOutlineDocumentReport } from "react-icons/hi";
 import { PiPrinterDuotone } from "react-icons/pi";
 import { MdOutlineContactPage } from "react-icons/md";
 import { MdOutlineTextSnippet } from "react-icons/md";
-import Image from "../Images/logo.webp"
-import RzxImage from "../Images/rzx logo.jpg"
+import Image from "../Images/logo.webp";
+import RzxImage from "../Images/rzx logo.jpg";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+
+     const [selectedButton,setSelectedButton] = useState('home');
+
+     const handleSelect =(value)=>{
+      setSelectedButton(value)
+     }
   return (
     <>
     <div className='w-[20%] bg-[#121414]'>
     <img src={RzxImage} alt="logo" className='h-28 w-full'/> 
-    <div className='w-[90%] h-7 mt-2 ml-6 pl-4 bg-[#827f7a] text-xs text-gray-300 flex gap-2 items-center rounded-lg'
-    //   onClick={()=>navigate('/home')}
-      ><LuHome />Home
-      </div>
+    <Link to='/' className={`${selectedButton === 'home' ? 'bg-[#827f7a]' : " "} w-[90%] h-7 mt-2 ml-6 pl-4 text-xs text-gray-300 flex gap-2 items-center rounded-lg`}
+      onClick={()=>handleSelect('home')}><LuHome />Home
+      </Link>
 
-      <div className='w-[90%] h-5 mt-2 ml-6 pl-4 text-xs text-gray-400 flex gap-2  items-center rounded-lg'>
+      <Link to='/home' className={`${selectedButton === 'payout' ? 'bg-[#827f7a]' : " "} w-[90%] h-7 mt-2 ml-6 pl-4 text-xs text-gray-400 flex gap-2  items-center rounded-lg`}
+      onClick={()=>handleSelect('payout')} >
       <GoArrowUpRight />Payouts  
-      </div>
+      </Link>
 
       <div className='w-[90%] h-5 mt-2 ml-6 pl-4 text-xs text-gray-400 flex gap-2  items-center rounded-lg'>
         <IoMdCopy />Account Statement
